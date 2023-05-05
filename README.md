@@ -7,7 +7,3 @@ Projeto para a disciplina de Frameworks Web do XXIV Curso de Especialização em
 
 Ideia é ter um controle onde o usuário vai entrar com o dados das assinaturas
 Controlar quais são as assinaturas, o valor, a recorrência de pagamento (se existir) e o tempo para vencimento.
-
-
-
-cccccccccc
