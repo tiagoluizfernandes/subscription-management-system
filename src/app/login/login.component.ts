@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 export class LoginComponent {
   username!: string;
   password!: string;
+  loginError: boolean = false;
 
   constructor(private router: Router) {}
 
@@ -20,6 +21,7 @@ export class LoginComponent {
       this.router.navigate(['/menu']); // Redireciona para o menu
 
     } else {
+      this.loginError = true; // Set the login error flag (to show error message)
       console.log('Invalid username or password');
       // Show an error message
     }
