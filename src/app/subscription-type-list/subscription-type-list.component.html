@@ -7,7 +7,7 @@
 </head>
 <body>
   <header>
-    Subscription Management System
+    Subscription Management System - Type
   </header>
 
   <div class="container-fluid">
@@ -28,6 +28,32 @@
               <a class="nav-link" routerLink="/about">About</a>
             </li>            
           </ul>
+        </div>
+      </div>
+      <div class="col-md-10 bg-light">
+        <div class="container">
+          <h2>Subscription Types</h2>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Description</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let subscriptionType of subscriptionTypes" [class.active]="subscriptionType === selectedSubscriptionType">
+                <td>{{ subscriptionType.id }}</td>
+                <td>{{ subscriptionType.description }}</td>
+                <td>
+                  <button class="btn btn-sm btn-primary" (click)="editSubscriptionType(subscriptionType)">Edit</button>
+                  <button class="btn btn-sm btn-danger" (click)="deleteSubscriptionType(subscriptionType)">Delete</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        
+          <button class="btn btn-primary" (click)="addSubscriptionType()">Add Subscription Type</button>
         </div>
       </div>
     </div>
