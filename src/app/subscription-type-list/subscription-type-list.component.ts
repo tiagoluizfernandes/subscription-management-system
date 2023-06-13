@@ -15,6 +15,13 @@ export class SubscriptionTypeListComponent {
 
   selectedSubscriptionType: SubscriptionType | null = null;
 
+  
+  openModal() {
+    const modalElement = document.getElementById('subscriptionTypeForm');
+    modalElement?.classList.add('show');
+    modalElement?.setAttribute('style', 'display: block');
+  }
+  
   addSubscriptionType(): void {
     const newId = this.subscriptionTypes.length + 1;
     const newSubscriptionType = new SubscriptionType(newId, '');

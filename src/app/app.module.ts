@@ -7,13 +7,15 @@ import { LoginComponent } from './login/login.component';
 import { FormsModule } from '@angular/forms';
 import { MenuComponent } from './menu/menu.component';
 import { SubscriptionTypeListComponent } from './subscription-type-list/subscription-type-list.component';
+import { SubscriptionTypeFormComponent } from './subscription-type-form/subscription-type-form.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     MenuComponent,
-    SubscriptionTypeListComponent
+    SubscriptionTypeListComponent,
+    SubscriptionTypeFormComponent
   ],
   imports: [
     BrowserModule,
