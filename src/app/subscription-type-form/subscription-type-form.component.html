@@ -11,17 +11,17 @@
         <!-- Your form content goes here -->
         <div class="form-group">
           <label for="subscriptionTypeId">ID:</label>
-          <input type="text" class="form-control" id="subscriptionTypeId" [(ngModel)]="subscriptionType.id">
+          <input type="text" class="form-control" id="subscriptionTypeId" [(ngModel)]="selectedSubscriptionType.id">
         </div>
         <div class="form-group">
           <label for="subscriptionTypeDescription">Description:</label>
-          <input type="text" class="form-control" id="subscriptionTypeDescription" [(ngModel)]="subscriptionType.description">
+          <input type="text" class="form-control" id="subscriptionTypeDescription" [(ngModel)]="selectedSubscriptionType.description">
         </div>
       </div>
-      <div class="modal-footer">
+      <div class="modal-footer">        
+        <button *ngIf="!selectedSubscriptionType.id" type="button" class="btn btn-primary">Create</button>
+        <button *ngIf="selectedSubscriptionType.id" type="button" class="btn btn-primary">Update</button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="closeModal()">Close</button>
-        <button type="button" class="btn btn-primary">Create</button>
-        <button type="button" class="btn btn-primary">Update</button>
       </div>
     </div>
   </div>

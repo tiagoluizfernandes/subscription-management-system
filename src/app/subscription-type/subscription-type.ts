@@ -7,7 +7,7 @@ export class SubscriptionType {
   constructor();
   
   constructor(id?: number, description?: string) {
-    this.id = id ?? 0;
-    this.description = description ?? ''!;
+    this.id = id!;
+    this.description = description!;
   }
 }

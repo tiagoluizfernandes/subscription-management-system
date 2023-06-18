@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { SubscriptionType } from '../subscription-type/subscription-type';
 
 @Component({
@@ -8,16 +8,16 @@ import { SubscriptionType } from '../subscription-type/subscription-type';
 })
 export class SubscriptionTypeFormComponent {
   @Input()
-  subscriptionType!: SubscriptionType;
+  selectedSubscriptionType!: SubscriptionType;
+  
 
-  constructor() { 
-    this.subscriptionType = new SubscriptionType();
-  }
-
+  
   closeModal() {
     const modalElement = document.getElementById('subscriptionTypeForm');
     modalElement?.classList.remove('show');
-    modalElement?.setAttribute('style', 'display: none');    
+    modalElement?.setAttribute('style', 'display: none');
+
+   
 
   }
 

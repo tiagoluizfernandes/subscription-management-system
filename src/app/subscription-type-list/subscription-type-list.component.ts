@@ -13,19 +13,18 @@ export class SubscriptionTypeListComponent {
     new SubscriptionType(3, 'Enterprise')
   ];
 
-  selectedSubscriptionType: SubscriptionType | null = null;
+  selectedSubscriptionType: SubscriptionType = new SubscriptionType();
 
   openModal(subscriptionType: SubscriptionType ) {
     const modalElement = document.getElementById('subscriptionTypeForm');
     modalElement?.classList.add('show');
     modalElement?.setAttribute('style', 'display: block');
-        
-
+    this.selectedSubscriptionType = subscriptionType;
   }
   
   addSubscriptionType(): void {
-    const newId = this.subscriptionTypes.length + 1;
-    const addSubscriptionType = new SubscriptionType(newId);    
+        
+    const addSubscriptionType = new SubscriptionType();    
     this.openModal(addSubscriptionType);
 
     //this.subscriptionTypes.push(createSubscriptionType);
@@ -36,16 +35,13 @@ export class SubscriptionTypeListComponent {
   editSubscriptionType(subscriptionType: SubscriptionType): void {
     const editSubscriptionType = subscriptionType;        
     this.openModal(editSubscriptionType);
-
-    this.selectedSubscriptionType = subscriptionType;
-
   }
 
   deleteSubscriptionType(subscriptionType: SubscriptionType): void {
     const index = this.subscriptionTypes.indexOf(subscriptionType);
     if (index !== -1) {
       this.subscriptionTypes.splice(index, 1);
-      this.selectedSubscriptionType = null;
+      this.selectedSubscriptionType = new SubscriptionType();
     }else{
       alert('Subscription type not found in list');
     }

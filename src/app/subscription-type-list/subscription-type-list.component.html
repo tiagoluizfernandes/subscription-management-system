@@ -25,6 +25,6 @@
   -->
   <button type="button" class="btn btn-primary" (click)="addSubscriptionType()">Add</button>
 </div>
-<div>
-  <app-subscription-type-form></app-subscription-type-form>
+<div>  
+  <app-subscription-type-form [selectedSubscriptionType]="selectedSubscriptionType!"></app-subscription-type-form>
 </div>
