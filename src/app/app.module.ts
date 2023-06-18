@@ -11,6 +11,8 @@ import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 import { SubscriptionItemListComponent } from './subscription-item-list/subscription-item-list.component';
 import { SubscriptionItemFormComponent } from './subscription-item-form/subscription-item-form.component';
+import { AppHeaderComponent } from './app-header/app-header.component';
+import { AppFooterComponent } from './app-footer/app-footer.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import { SubscriptionItemFormComponent } from './subscription-item-form/subscrip
     HomeComponent,
     AboutComponent,
     SubscriptionItemListComponent,
-    SubscriptionItemFormComponent
+    SubscriptionItemFormComponent,
+    AppHeaderComponent,
+    AppFooterComponent
   ],
   imports: [
     BrowserModule,
