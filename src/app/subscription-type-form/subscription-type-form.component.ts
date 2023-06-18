@@ -11,6 +11,9 @@ import { SubscriptionTypeService } from '../subscription-type/subscription-type.
 export class SubscriptionTypeFormComponent implements OnInit {
   subscriptionType: SubscriptionType | null = new SubscriptionType();
 
+  //showError = false;
+  subscriptionTypeErrorMessage = '';
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -27,6 +30,13 @@ export class SubscriptionTypeFormComponent implements OnInit {
 
   saveSubscriptionType() {
     if (this.subscriptionType) {
+      this.subscriptionTypeErrorMessage = '';
+
+      if (this.subscriptionType.description === '' || this.subscriptionType.description === undefined) { 
+        this.subscriptionTypeErrorMessage = 'Description is required.';
+        //this.showError = true;
+        return;
+      }
             
       if (this.subscriptionType.id === 0 || this.subscriptionType.id === undefined) {        
         this.subscriptionTypeService.addSubscriptionType(this.subscriptionType);

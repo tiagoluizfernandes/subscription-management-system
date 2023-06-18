@@ -58,9 +58,6 @@ body {
   width: 278px;
 }
 
-
-
-
 .login p.submit {
   text-align: right;
 }
@@ -159,7 +156,6 @@ input[type=submit]:active {
 .lt-ie9 input[type=text], .lt-ie9 input[type=password] {
   line-height: 34px;
 }
-
 
 .error-message {
   color: red;
