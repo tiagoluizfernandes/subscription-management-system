@@ -1,35 +1,34 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SubscriptionType } from '../subscription-type/subscription-type';
+import { SubscriptionTypeService } from '../subscription-type/subscription-type.service';
 
 @Component({
   selector: 'app-subscription-type-list',
   templateUrl: './subscription-type-list.component.html',
   styleUrls: ['./subscription-type-list.component.css']
 })
-export class SubscriptionTypeListComponent {
-  subscriptionTypes: SubscriptionType[] = [
-    new SubscriptionType(1, 'Standard'),
-    new SubscriptionType(2, 'Premium'),
-    new SubscriptionType(3, 'Enterprise')
-  ];
-
+export class SubscriptionTypeListComponent implements OnInit {
+  subscriptionTypes: SubscriptionType[] = [];
   selectedSubscriptionType: SubscriptionType = new SubscriptionType();
+  
+  constructor(private route: ActivatedRoute, private router: Router, private subscriptionTypeService: SubscriptionTypeService) { }
+
+  ngOnInit() {
+    this.subscriptionTypes = this.subscriptionTypeService.getSubscriptionTypes();
+  }   
 
   openModal(subscriptionType: SubscriptionType ) {
-    const modalElement = document.getElementById('subscriptionTypeForm');
-    modalElement?.classList.add('show');
-    modalElement?.setAttribute('style', 'display: block');
-    this.selectedSubscriptionType = subscriptionType;
+    
+    this.router.navigate(['/subscription-type-form', { id: subscriptionType.id, name: subscriptionType.description }]);
+
   }
-  
+    
   addSubscriptionType(): void {
         
     const addSubscriptionType = new SubscriptionType();    
     this.openModal(addSubscriptionType);
-
-    //this.subscriptionTypes.push(createSubscriptionType);
-    //this.selectedSubscriptionType = createSubscriptionType;
-
+    
   }
 
   editSubscriptionType(subscriptionType: SubscriptionType): void {
@@ -39,11 +38,9 @@ export class SubscriptionTypeListComponent {
 
   deleteSubscriptionType(subscriptionType: SubscriptionType): void {
     const index = this.subscriptionTypes.indexOf(subscriptionType);
-    if (index !== -1) {
-      this.subscriptionTypes.splice(index, 1);
-      this.selectedSubscriptionType = new SubscriptionType();
-    }else{
-      alert('Subscription type not found in list');
-    }
+
+    if(index >= 0){
+      this.subscriptionTypeService.deleteSubscriptionType(subscriptionType);
+    }  
   }
 }

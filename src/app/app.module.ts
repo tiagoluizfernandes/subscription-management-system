@@ -8,6 +8,9 @@ import { FormsModule } from '@angular/forms';
 import { SubscriptionTypeListComponent } from './subscription-type-list/subscription-type-list.component';
 import { SubscriptionTypeFormComponent } from './subscription-type-form/subscription-type-form.component';
 import { HomeComponent } from './home/home.component';
+import { AboutComponent } from './about/about.component';
+import { SubscriptionItemListComponent } from './subscription-item-list/subscription-item-list.component';
+import { SubscriptionItemFormComponent } from './subscription-item-form/subscription-item-form.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +18,10 @@ import { HomeComponent } from './home/home.component';
     LoginComponent,
     SubscriptionTypeListComponent,
     SubscriptionTypeFormComponent,
-    HomeComponent
+    HomeComponent,
+    AboutComponent,
+    SubscriptionItemListComponent,
+    SubscriptionItemFormComponent
   ],
   imports: [
     BrowserModule,
