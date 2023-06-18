@@ -25,17 +25,19 @@ export class SubscriptionTypeListComponent {
   
   addSubscriptionType(): void {
     const newId = this.subscriptionTypes.length + 1;
-    const newSubscriptionType = new SubscriptionType(newId);
-    this.subscriptionTypes.push(newSubscriptionType);
-    this.selectedSubscriptionType = newSubscriptionType;
+    const addSubscriptionType = new SubscriptionType(newId);    
+    this.openModal(addSubscriptionType);
 
-    this.openModal(this.selectedSubscriptionType);
+    //this.subscriptionTypes.push(createSubscriptionType);
+    //this.selectedSubscriptionType = createSubscriptionType;
+
   }
 
   editSubscriptionType(subscriptionType: SubscriptionType): void {
-    this.selectedSubscriptionType = subscriptionType;
+    const editSubscriptionType = subscriptionType;        
+    this.openModal(editSubscriptionType);
 
-    this.openModal(this.selectedSubscriptionType);
+    this.selectedSubscriptionType = subscriptionType;
 
   }
 
@@ -45,7 +47,7 @@ export class SubscriptionTypeListComponent {
       this.subscriptionTypes.splice(index, 1);
       this.selectedSubscriptionType = null;
     }else{
-      alert('Subscription type not found');
+      alert('Subscription type not found in list');
     }
   }
 }

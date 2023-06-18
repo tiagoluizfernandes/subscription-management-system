@@ -10,7 +10,9 @@ export class SubscriptionTypeFormComponent {
   @Input()
   subscriptionType!: SubscriptionType;
 
-  constructor() { }
+  constructor() { 
+    this.subscriptionType = new SubscriptionType();
+  }
 
   closeModal() {
     const modalElement = document.getElementById('subscriptionTypeForm');
