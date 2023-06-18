@@ -1,74 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Subscription Management System</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-</head>
-<body>
-  <header>
-    Subscription Management System - Type
-  </header>
+<div>
+  <h1>Subscription Types</h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Description</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let subscriptionType of subscriptionTypes" [class.active]="subscriptionType === selectedSubscriptionType">
+        <td>{{ subscriptionType.id }}</td>
+        <td>{{ subscriptionType.description }}</td>
+        <td>
+          <button class="btn btn-sm btn-primary" (click)="editSubscriptionType(subscriptionType)">Edit</button>
+          <button class="btn btn-sm btn-danger" (click)="deleteSubscriptionType(subscriptionType)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-2 bg-light">
-        <div class="nav-sidebar">
-          <ul class="nav flex-column">
-            <li class="nav-item active">
-              <a class="nav-link" routerLink="/menu">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" routerLink="/subscription-type-list">Subscription Types</a>
-            </li>
-            <li class="nav-item">              
-              <a class="nav-link" routerLink="/subscription-item">Subscription Items</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" routerLink="/about">About</a>
-            </li>            
-          </ul>
-        </div>
-      </div>
-      <div class="col-md-10 bg-light">
-        <div class="container">
-          <h2>Subscription Types</h2>
-          <table class="table">
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Description</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let subscriptionType of subscriptionTypes" [class.active]="subscriptionType === selectedSubscriptionType">
-                <td>{{ subscriptionType.id }}</td>
-                <td>{{ subscriptionType.description }}</td>
-                <td>
-                  <button class="btn btn-sm btn-primary" (click)="editSubscriptionType(subscriptionType)">Edit</button>
-                  <button class="btn btn-sm btn-danger" (click)="deleteSubscriptionType(subscriptionType)">Delete</button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        
-          <!--
-            <button class="btn btn-primary" (click)="addSubscriptionType()">Add Subscription Type</button>
-          -->
-          <button type="button" class="btn btn-primary" (click)="openModal()">Open Modal</button>
-        </div>
-      </div>
-    </div>
-    <div>
-      <app-subscription-type-form> </app-subscription-type-form>
-    </div>
-  </div>
-
-  <footer>Desenvolvido por Tiago Luiz Fernandes</footer>
-
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-</body>
-</html>
+  <!--
+    <button class="btn btn-primary" (click)="addSubscriptionType()">Add Subscription Type</button>
+  -->
+  <button type="button" class="btn btn-primary" (click)="addSubscriptionType()">Add</button>
+</div>
+<div>
+  <app-subscription-type-form></app-subscription-type-form>
+</div>

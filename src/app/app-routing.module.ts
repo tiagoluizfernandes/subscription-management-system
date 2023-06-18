@@ -2,13 +2,13 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { LoginComponent } from './login/login.component';
-import { MenuComponent } from './menu/menu.component';
+import { HomeComponent } from "./home/home.component";
 import { SubscriptionTypeListComponent } from './subscription-type-list/subscription-type-list.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
-  { path: 'menu', component: MenuComponent },
+  { path: 'home', component: HomeComponent },
   { path: 'subscription-type-list', component: SubscriptionTypeListComponent }
 ];
 
@@ -16,4 +16,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+  export class AppRoutingModule { }

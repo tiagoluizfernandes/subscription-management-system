@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { SubscriptionType } from '../subscription-type/subscription-type';
 
 @Component({
   selector: 'app-subscription-type-form',
@@ -6,11 +7,16 @@ import { Component } from '@angular/core';
   styleUrls: ['./subscription-type-form.component.css']
 })
 export class SubscriptionTypeFormComponent {
+  @Input()
+  subscriptionType!: SubscriptionType;
+
+  constructor() { }
 
   closeModal() {
     const modalElement = document.getElementById('subscriptionTypeForm');
     modalElement?.classList.remove('show');
-    modalElement?.setAttribute('style', 'display: none');
+    modalElement?.setAttribute('style', 'display: none');    
+
   }
 
 }

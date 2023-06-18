@@ -15,22 +15,28 @@ export class SubscriptionTypeListComponent {
 
   selectedSubscriptionType: SubscriptionType | null = null;
 
-  
-  openModal() {
+  openModal(subscriptionType: SubscriptionType ) {
     const modalElement = document.getElementById('subscriptionTypeForm');
     modalElement?.classList.add('show');
     modalElement?.setAttribute('style', 'display: block');
+        
+
   }
   
   addSubscriptionType(): void {
     const newId = this.subscriptionTypes.length + 1;
-    const newSubscriptionType = new SubscriptionType(newId, '');
+    const newSubscriptionType = new SubscriptionType(newId);
     this.subscriptionTypes.push(newSubscriptionType);
     this.selectedSubscriptionType = newSubscriptionType;
+
+    this.openModal(this.selectedSubscriptionType);
   }
 
   editSubscriptionType(subscriptionType: SubscriptionType): void {
     this.selectedSubscriptionType = subscriptionType;
+
+    this.openModal(this.selectedSubscriptionType);
+
   }
 
   deleteSubscriptionType(subscriptionType: SubscriptionType): void {
@@ -38,6 +44,8 @@ export class SubscriptionTypeListComponent {
     if (index !== -1) {
       this.subscriptionTypes.splice(index, 1);
       this.selectedSubscriptionType = null;
+    }else{
+      alert('Subscription type not found');
     }
   }
 }
