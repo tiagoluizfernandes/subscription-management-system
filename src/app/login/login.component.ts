@@ -18,7 +18,7 @@ export class LoginComponent {
       console.log('Login successful');
       
       // Perform any desired action (e.g., navigate to a different page)
-      this.router.navigate(['/menu']); // Redireciona para o menu
+      this.router.navigate(['/home']); // Redireciona para o menu
 
     } else {
       this.loginError = true; // Set the login error flag (to show error message)

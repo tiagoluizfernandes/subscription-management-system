@@ -5,13 +5,27 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { FormsModule } from '@angular/forms';
-import { MenuComponent } from './menu/menu.component';
+import { SubscriptionTypeListComponent } from './subscription-type-list/subscription-type-list.component';
+import { SubscriptionTypeFormComponent } from './subscription-type-form/subscription-type-form.component';
+import { HomeComponent } from './home/home.component';
+import { AboutComponent } from './about/about.component';
+import { SubscriptionItemListComponent } from './subscription-item-list/subscription-item-list.component';
+import { SubscriptionItemFormComponent } from './subscription-item-form/subscription-item-form.component';
+import { AppHeaderComponent } from './app-header/app-header.component';
+import { AppFooterComponent } from './app-footer/app-footer.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    MenuComponent
+    SubscriptionTypeListComponent,
+    SubscriptionTypeFormComponent,
+    HomeComponent,
+    AboutComponent,
+    SubscriptionItemListComponent,
+    SubscriptionItemFormComponent,
+    AppHeaderComponent,
+    AppFooterComponent
   ],
   imports: [
     BrowserModule,
