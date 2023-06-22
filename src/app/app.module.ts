@@ -14,6 +14,8 @@ import { SubscriptionItemFormComponent } from './subscription-item-form/subscrip
 import { AppHeaderComponent } from './app-header/app-header.component';
 import { AppFooterComponent } from './app-footer/app-footer.component';
 
+import { LoginService } from './login/login.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,14 +27,14 @@ import { AppFooterComponent } from './app-footer/app-footer.component';
     SubscriptionItemListComponent,
     SubscriptionItemFormComponent,
     AppHeaderComponent,
-    AppFooterComponent
+    AppFooterComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule
   ],
-  providers: [],
+  providers: [LoginService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
