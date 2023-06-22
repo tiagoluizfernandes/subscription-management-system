@@ -1,3 +1,6 @@
-<header>
-  Subscription Management System
-</header>
+<div class="header-container">
+  <header class="header">Subscription Management System</header>
+  <div class="logout-icon" (click)="logout()" *ngIf="isLoggedIn()" >
+    <i class="fas fa-sign-out-alt"></i>
+  </div>
+</div>
