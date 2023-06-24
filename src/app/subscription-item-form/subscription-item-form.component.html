@@ -7,8 +7,11 @@
       <input type="text" id="id" name="id" [(ngModel)]="subscriptionItem!.id" disabled="true">
     </div>
     <div class="form-group">
-      <label for="subscriptionType" >Subscription Type:</label>
-      <input type="text" id="subscriptionType" name="subscriptionType" [(ngModel)]="subscriptionItem!.subscriptionType">
+      <label for="subscriptionType">Subscription Type:</label>
+      <select id="subscriptionType" name="subscriptionType" [(ngModel)]="selectedTypeId">
+        <option value="">Select Type</option>
+        <option *ngFor="let type of subscriptionTypeList" [value]="type.id">{{ type.description }}</option>
+      </select>
     </div>
     <div class="form-group">
       <label for="description">Description:</label>

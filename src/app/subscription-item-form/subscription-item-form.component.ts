@@ -13,6 +13,7 @@ import { SubscriptionTypeService } from '../subscription-type/subscription-type.
 export class SubscriptionItemFormComponent implements OnInit {
   subscriptionItem: SubscriptionItem | null = new SubscriptionItem();
   subscriptionTypeList: SubscriptionType[] = [];
+  selectedTypeId: number | undefined;
 
   //showError = false;
   subscriptionItemErrorMessage = '';
@@ -34,6 +35,7 @@ export class SubscriptionItemFormComponent implements OnInit {
     });
 
     this.subscriptionTypeList = this.subscriptionItemService.getSubscriptionItems();
+    console.log('Init ' + this.subscriptionTypeList.length);
 
   }
 
