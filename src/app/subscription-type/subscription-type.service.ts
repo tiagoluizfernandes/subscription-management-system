@@ -5,12 +5,7 @@ import { SubscriptionType } from './subscription-type';
   providedIn: 'root'
 })
 export class SubscriptionTypeService {
-  private subscriptionTypes: SubscriptionType[] = [
-    new SubscriptionType(1, 'Netflix'),
-    new SubscriptionType(2, 'Amazon Prime'),
-    new SubscriptionType(3, 'Apple+'),
-    new SubscriptionType(4, 'Disney+')
-  ];
+  private subscriptionTypes: SubscriptionType[] = [];
 
   getSubscriptionTypes(): SubscriptionType[] {
     return this.subscriptionTypes;
