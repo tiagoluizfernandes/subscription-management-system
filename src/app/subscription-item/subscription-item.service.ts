@@ -5,19 +5,19 @@ import { SubscriptionItem } from './subscription-item';
   providedIn: 'root'
 })
 export class SubscriptionItemService {
-  private subscriptionItems: SubscriptionItem[] = [];
+  private subscriptionItemList: SubscriptionItem[] = [];
 
   getSubscriptionItems(): SubscriptionItem[] {
-    return this.subscriptionItems;
+    return this.subscriptionItemList;
   }
 
   getSubscriptionItem(id: number): SubscriptionItem | undefined {
-    return this.subscriptionItems.find(st => st.id === id);
+    return this.subscriptionItemList.find((st) => st.id === id);
   }
 
   addSubscriptionItem(subscriptionItem: SubscriptionItem) {
 
-    let maxId = Math.max(...this.subscriptionItems.map(st => st.id));
+    let maxId = Math.max(...this.subscriptionItemList.map((st) => st.id));
 
     if(maxId === -Infinity){
       maxId = 0;
@@ -25,20 +25,22 @@ export class SubscriptionItemService {
 
     subscriptionItem.id = maxId + 1;
 
-    this.subscriptionItems.push(subscriptionItem);
+    this.subscriptionItemList.push(subscriptionItem);
   }
 
   updateSubscriptionItem(subscriptionItem: SubscriptionItem) {
-    const index = this.subscriptionItems.findIndex(st => st.id === subscriptionItem.id);
+    const index = this.subscriptionItemList.findIndex(
+      (st) => st.id === subscriptionItem.id
+    );
     if (index !== -1) {
-      this.subscriptionItems[index] = subscriptionItem;
+      this.subscriptionItemList[index] = subscriptionItem;
     }
   }
 
   deleteSubscriptionItem(subscriptionItem: SubscriptionItem) {
-    const index = this.subscriptionItems.indexOf(subscriptionItem);
+    const index = this.subscriptionItemList.indexOf(subscriptionItem);
     if (index !== -1) {
-      this.subscriptionItems.splice(index, 1);
+      this.subscriptionItemList.splice(index, 1);
     }
   }
 }

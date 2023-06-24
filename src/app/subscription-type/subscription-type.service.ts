@@ -5,19 +5,19 @@ import { SubscriptionType } from './subscription-type';
   providedIn: 'root'
 })
 export class SubscriptionTypeService {
-  private subscriptionTypes: SubscriptionType[] = [];
+  private subscriptionTypeList: SubscriptionType[] = [];
 
   getSubscriptionTypes(): SubscriptionType[] {
-    return this.subscriptionTypes;
+    return this.subscriptionTypeList;
   }
 
   getSubscriptionType(id: number): SubscriptionType | undefined {
-    return this.subscriptionTypes.find(st => st.id === id);
+    return this.subscriptionTypeList.find((st) => st.id === id);
   }
 
   addSubscriptionType(subscriptionType: SubscriptionType) {
 
-    let maxId = Math.max(...this.subscriptionTypes.map(st => st.id));
+    let maxId = Math.max(...this.subscriptionTypeList.map((st) => st.id));
 
     if(maxId === -Infinity){
       maxId = 0;
@@ -25,20 +25,22 @@ export class SubscriptionTypeService {
 
     subscriptionType.id = maxId + 1;
 
-    this.subscriptionTypes.push(subscriptionType);
+    this.subscriptionTypeList.push(subscriptionType);
   }
 
   updateSubscriptionType(subscriptionType: SubscriptionType) {
-    const index = this.subscriptionTypes.findIndex(st => st.id === subscriptionType.id);
+    const index = this.subscriptionTypeList.findIndex(
+      (st) => st.id === subscriptionType.id
+    );
     if (index !== -1) {
-      this.subscriptionTypes[index] = subscriptionType;
+      this.subscriptionTypeList[index] = subscriptionType;
     }
   }
 
   deleteSubscriptionType(subscriptionType: SubscriptionType) {
-    const index = this.subscriptionTypes.indexOf(subscriptionType);
+    const index = this.subscriptionTypeList.indexOf(subscriptionType);
     if (index !== -1) {
-      this.subscriptionTypes.splice(index, 1);
+      this.subscriptionTypeList.splice(index, 1);
     }
   }
 }

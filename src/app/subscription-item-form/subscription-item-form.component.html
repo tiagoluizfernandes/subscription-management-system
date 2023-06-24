@@ -19,7 +19,14 @@
     </div>
     <div class="form-group">
       <label for="billingPeriodicity">Billing Periodicity:</label>
-      <input type="text" id="billingPeriodicity" name="billingPeriodicity" [(ngModel)]="subscriptionItem!.billingPeriodicity">
+      <select id="billingPeriodicity" name="billingPeriodicity" [(ngModel)]="subscriptionItem!.billingPeriodicity">
+        <option value=""></option>
+        <option value="O">Once</option>
+        <option value="D">Daily</option>
+        <option value="W">Weekly</option>
+        <option value="M">Monthly</option>
+        <option value="Y">Yearly</option>
+      </select>
     </div>
     <div class="form-group">
       <label for="billingValue">Billing Value:</label>
