@@ -13,7 +13,7 @@ import { SubscriptionItemListComponent } from './subscription-item-list/subscrip
 import { SubscriptionItemFormComponent } from './subscription-item-form/subscription-item-form.component';
 import { AppHeaderComponent } from './app-header/app-header.component';
 import { AppFooterComponent } from './app-footer/app-footer.component';
-
+import { AngularWebStorageModule } from 'angular-web-storage';
 import { LoginService } from './login/login.service';
 
 @NgModule({
@@ -32,7 +32,8 @@ import { LoginService } from './login/login.service';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    AngularWebStorageModule
   ],
   providers: [LoginService],
   bootstrap: [AppComponent]
