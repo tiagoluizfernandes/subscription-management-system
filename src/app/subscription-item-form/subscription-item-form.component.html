@@ -8,8 +8,8 @@
     </div>
     <div class="form-group">
       <label for="subscriptionType">Subscription Type:</label>
-      <select id="subscriptionType" name="subscriptionType" [(ngModel)]="selectedTypeId">
-        <option value="">Select Type</option>
+      <select id="subscriptionType" name="subscriptionType" [(ngModel)]="subscriptionItem!.subscriptionTypeId">
+        <option value=""></option>
         <option *ngFor="let type of subscriptionTypeList" [value]="type.id">{{ type.description }}</option>
       </select>
     </div>
@@ -48,14 +48,14 @@
       <div *ngIf="subscriptionEndDateErrorMessage" class="error-message">
         {{subscriptionEndDateErrorMessage}}
       </div>
-    </div>   
+    </div>
     <div class="form-group">
       <label for="subscriptionStartBillingDate">Subscription Start Billing Date:</label>
       <input type="date" id="subscriptionStartBillingDate" name="subscriptionStartBillingDate" [(ngModel)]="subscriptionItem!.subscriptionStartBillingDate">
       <div *ngIf="subscriptionStartBillingDateErrorMessage" class="error-message">
         {{subscriptionStartBillingDateErrorMessage}}
       </div>
-    </div>    
+    </div>
     <div class="form-group">
       <label for="notes">Notes:</label>
       <textarea id="notes" name="notes" [(ngModel)]="subscriptionItem!.notes" style="resize: none;"></textarea>

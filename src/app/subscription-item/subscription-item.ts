@@ -2,8 +2,8 @@ import { SubscriptionType } from "../subscription-type/subscription-type";
 
 export class SubscriptionItem {
   id: number;
-  subscriptionType: SubscriptionType;
   description: string;
+  subscriptionTypeId: number;
   billingPeriodicity: string;
   billingValue: number;
   subscriptionStartDate: Date;
@@ -14,7 +14,7 @@ export class SubscriptionItem {
   constructor(
     id?: number,
     description?: string,
-    subscriptionType?: SubscriptionType,
+    subscriptionTypeId?: number,
     billingPeriodicity?: string,
     billingValue?: number,
     subscriptionStartDate?: Date,
@@ -24,7 +24,7 @@ export class SubscriptionItem {
   ) {
     this.id = id!;
     this.description = description!;
-    this.subscriptionType = subscriptionType!;
+    this.subscriptionTypeId = subscriptionTypeId!;
     this.billingPeriodicity = billingPeriodicity!;
     this.billingValue = billingValue!;
     this.subscriptionStartDate = subscriptionStartDate!;

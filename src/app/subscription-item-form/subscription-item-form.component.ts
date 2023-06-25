@@ -13,7 +13,6 @@ import { SubscriptionTypeService } from '../subscription-type/subscription-type.
 export class SubscriptionItemFormComponent implements OnInit {
   subscriptionItem: SubscriptionItem | null = new SubscriptionItem();
   subscriptionTypeList: SubscriptionType[] = [];
-  selectedTypeId: number | undefined;
 
   subscriptionItemErrorMessage = '';
   subscriptionStartDateErrorMessage = '';
@@ -40,7 +39,7 @@ export class SubscriptionItemFormComponent implements OnInit {
     this.subscriptionTypeList = this.subscriptionTypeService.getSubscriptionTypes();
 
   }
-  
+
   countWordsUsingRegex(input: string): number {
     const regex = /\b\w+\b/g;
     const matches = input.match(regex);
@@ -49,9 +48,9 @@ export class SubscriptionItemFormComponent implements OnInit {
 
   saveSubscriptionItem() {
     const regex = /^\w+\s+\w+.*$/;
-    
+
     if (this.subscriptionItem) {
-      this.subscriptionItemErrorMessage = '';      
+      this.subscriptionItemErrorMessage = '';
       this.subscriptionStartDateErrorMessage = '';
       this.subscriptionEndDateErrorMessage = '';
       this.subscriptionStartBillingDateErrorMessage = '';
@@ -59,20 +58,20 @@ export class SubscriptionItemFormComponent implements OnInit {
 
       if ( this.subscriptionItem.description === '' ||
            this.subscriptionItem.description === undefined) {
-        this.subscriptionItemErrorMessage = 'Description is required.';        
+        this.subscriptionItemErrorMessage = 'Description is required.';
         return;
       }
 
       console.log('Subscription Start Date: ' + this.subscriptionItem.subscriptionStartDate);
 
       if(this.subscriptionItem.subscriptionStartDate === undefined){
-        this.subscriptionStartDateErrorMessage = 'Subscription Start Date is required.';        
+        this.subscriptionStartDateErrorMessage = 'Subscription Start Date is required.';
         return;
-      }    
+      }
 
       if(this.subscriptionItem.notes === undefined){
         this.notesErrorMessage = 'Notes is required.';
-        return;        
+        return;
       }
 
       const wordCount = this.countWordsUsingRegex(this.subscriptionItem.notes);
