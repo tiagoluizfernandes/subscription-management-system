@@ -4,17 +4,29 @@
     <thead>
       <tr>
         <th>ID</th>
+        <th>Type</th>
         <th>Description</th>
+        <th>Periodicity</th>
+        <th>Value</th>
+        <th>Sub. Start</th>
+        <th>Sub. End</th>
+        <th>Bill. Start</th>
         <th>Actions</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let subscriptionItem of subscriptionItems" [class.active]="subscriptionItem === selectedSubscriptionItem">
-        <td>{{ subscriptionItem.id }}</td>
-        <td>{{ subscriptionItem.description }}</td>
+      <tr *ngFor="let item of subscriptionItems" [class.active]="item === selectedSubscriptionItem">
+        <td>{{ item.id }}</td>
+        <td>{{ item.subscriptionType }}</td>
+        <td>{{ item.description }}</td>
+        <td>{{ item.billingPeriodicity }}</td>
+        <td>{{ item.billingValue }}</td>
+        <td>{{ item.subscriptionStartDate }}</td>
+        <td>{{ item.subscriptionEndDate }}</td>
+        <td>{{ item.subscriptionStartBillingDate }}</td>        
         <td>
-          <button class="btn btn-sm btn-primary" (click)="editSubscriptionItem(subscriptionItem)">Edit</button>
-          <button class="btn btn-sm btn-danger" (click)="deleteSubscriptionItem(subscriptionItem)">Delete</button>
+          <button class="btn btn-sm btn-primary" (click)="editSubscriptionItem(item)">Edit</button>
+          <button class="btn btn-sm btn-danger" (click)="deleteSubscriptionItem(item)">Delete</button>
         </td>
       </tr>
     </tbody>

@@ -47,10 +47,10 @@ export class SubscriptionTypeService {
     );
     if (index !== -1) {
       this.subscriptionTypeList[index] = subscriptionType;
+
+      this.localStorageService.set('subscriptionTypeList', this.subscriptionTypeList);
     }
-
-    this.localStorageService.set('subscriptionTypeList', this.subscriptionTypeList);
-
+    
   }
 
   deleteSubscriptionType(subscriptionType: SubscriptionType) {

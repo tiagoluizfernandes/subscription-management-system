@@ -37,8 +37,7 @@ export class SubscriptionItemFormComponent implements OnInit {
           .find((st) => st.id === subscriptionItemId) || new SubscriptionItem();
     });
 
-    this.subscriptionTypeList = this.subscriptionItemService.getSubscriptionItems();
-    console.log('Init ' + this.subscriptionTypeList.length);
+    this.subscriptionTypeList = this.subscriptionTypeService.getSubscriptionTypes();
 
   }
   
