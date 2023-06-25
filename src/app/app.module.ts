@@ -13,6 +13,8 @@ import { SubscriptionItemListComponent } from './subscription-item-list/subscrip
 import { SubscriptionItemFormComponent } from './subscription-item-form/subscription-item-form.component';
 import { AppHeaderComponent } from './app-header/app-header.component';
 import { AppFooterComponent } from './app-footer/app-footer.component';
+import { AngularWebStorageModule } from 'angular-web-storage';
+import { LoginService } from './login/login.service';
 
 @NgModule({
   declarations: [
@@ -25,14 +27,15 @@ import { AppFooterComponent } from './app-footer/app-footer.component';
     SubscriptionItemListComponent,
     SubscriptionItemFormComponent,
     AppHeaderComponent,
-    AppFooterComponent
+    AppFooterComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    AngularWebStorageModule
   ],
-  providers: [],
+  providers: [LoginService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

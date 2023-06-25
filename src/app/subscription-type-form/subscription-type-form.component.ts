@@ -10,6 +10,7 @@ import { SubscriptionTypeService } from '../subscription-type/subscription-type.
 })
 export class SubscriptionTypeFormComponent implements OnInit {
   subscriptionType: SubscriptionType | null = new SubscriptionType();
+  subscriptionTypeErrorMessage = '';
 
   constructor(
     private route: ActivatedRoute,
@@ -24,9 +25,14 @@ export class SubscriptionTypeFormComponent implements OnInit {
     });
   }
 
-
   saveSubscriptionType() {
     if (this.subscriptionType) {
+      this.subscriptionTypeErrorMessage = '';
+
+      if (this.subscriptionType.description === '' || this.subscriptionType.description === undefined) { 
+        this.subscriptionTypeErrorMessage = 'Description is required.';
+        return;
+      }
             
       if (this.subscriptionType.id === 0 || this.subscriptionType.id === undefined) {        
         this.subscriptionTypeService.addSubscriptionType(this.subscriptionType);

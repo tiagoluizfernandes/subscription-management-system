@@ -1,27 +1,33 @@
 import { Injectable } from '@angular/core';
 import { SubscriptionType } from './subscription-type';
+import { LocalStorageService } from 'angular-web-storage';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SubscriptionTypeService {
-  private subscriptionTypes: SubscriptionType[] = [
-    new SubscriptionType(1, 'Type A'),
-    new SubscriptionType(2, 'Type B'),
-    new SubscriptionType(3, 'Type C')
-  ];
+  private subscriptionTypeList: SubscriptionType[] = [];
 
-  getSubscriptionTypes(): SubscriptionType[] {
-    return this.subscriptionTypes;
+  constructor(private localStorageService: LocalStorageService) {
+  }
+
+  getSubscriptionTypes(): SubscriptionType[] {    
+
+    this.subscriptionTypeList = this.localStorageService.get('subscriptionTypeList') || [];
+
+    return this.subscriptionTypeList;
   }
 
   getSubscriptionType(id: number): SubscriptionType | undefined {
-    return this.subscriptionTypes.find(st => st.id === id);
+
+    this.subscriptionTypeList = this.localStorageService.get('subscriptionTypeList') || [];
+
+    return this.subscriptionTypeList.find((st) => st.id === id);
   }
 
   addSubscriptionType(subscriptionType: SubscriptionType) {
 
-    let maxId = Math.max(...this.subscriptionTypes.map(st => st.id));
+    let maxId = Math.max(...this.subscriptionTypeList.map((st) => st.id));
 
     if(maxId === -Infinity){
       maxId = 0;
@@ -29,20 +35,30 @@ export class SubscriptionTypeService {
 
     subscriptionType.id = maxId + 1;
 
-    this.subscriptionTypes.push(subscriptionType);
+    this.subscriptionTypeList.push(subscriptionType);
+
+    this.localStorageService.set('subscriptionTypeList', this.subscriptionTypeList);
+
   }
 
   updateSubscriptionType(subscriptionType: SubscriptionType) {
-    const index = this.subscriptionTypes.findIndex(st => st.id === subscriptionType.id);
+    const index = this.subscriptionTypeList.findIndex(
+      (st) => st.id === subscriptionType.id
+    );
     if (index !== -1) {
-      this.subscriptionTypes[index] = subscriptionType;
+      this.subscriptionTypeList[index] = subscriptionType;
+
+      this.localStorageService.set('subscriptionTypeList', this.subscriptionTypeList);
     }
+    
   }
 
   deleteSubscriptionType(subscriptionType: SubscriptionType) {
-    const index = this.subscriptionTypes.indexOf(subscriptionType);
+    const index = this.subscriptionTypeList.indexOf(subscriptionType);
     if (index !== -1) {
-      this.subscriptionTypes.splice(index, 1);
+      this.subscriptionTypeList.splice(index, 1);
+
+      this.localStorageService.set('subscriptionTypeList', this.subscriptionTypeList);
     }
   }
 }
