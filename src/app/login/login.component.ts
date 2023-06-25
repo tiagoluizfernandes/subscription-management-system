@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService } from './login.service';
-import { LocalStorageService } from '../local-storage/local-storage.service'
+import { SessionStorageService } from 'angular-web-storage';
 
 @Component({
   selector: 'app-login',
@@ -12,27 +12,31 @@ export class LoginComponent {
   username!: string;
   password!: string;
   loginError: boolean = false;
-
+  
   constructor(
     private router: Router,
     private loginService: LoginService,
-    private localStorageService: LocalStorageService
+    private sessionStorageService: SessionStorageService
   ) {}
 
   login() {
     this.loginError = false;
-    if (this.username === 'admin' && this.password === 'admin') {
-      console.log('Login successful');
-      this.loginService.setAuthenticated(true); // Set the login status in the login service
 
-      this.localStorageService.setItem('username',this.username);
+    const authenticated = this.sessionStorageService.get('authenticated');
+    
+    if(authenticated){
+      this.router.navigate(['/home']); // Redireciona para a home
+    }else{
 
-      // Perform any desired action (e.g., navigate to a different page)
-      this.router.navigate(['/home']); // Redireciona para o menu
-    } else {
-      this.loginError = true; // Set the login error flag (to show error message)
-      console.log('Invalid username or password');
-      // Show an error message
+      if ( (this.username === 'admin' && this.password === 'admin' || (this.username === 'user' && this.password === 'user'))) {
+        console.log('Login successful');
+        this.loginService.authenticate(this.username,true); // Set the login status in the login service
+        
+        this.router.navigate(['/home']); // Redireciona para a home
+      } else {
+        this.loginError = true;
+        console.log('Invalid username or password');        
+      }
     }
   }
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from '../login/login.service';
-import { LocalStorageService } from '../local-storage/local-storage.service';
+import { SessionStorageService } from '../session-storage/session-storage.service';
 
 @Component({
   selector: 'app-header',
@@ -8,22 +8,22 @@ import { LocalStorageService } from '../local-storage/local-storage.service';
   styleUrls: ['./app-header.component.css'],
 })
 export class AppHeaderComponent implements OnInit{
-  loggedInUser: any;
+  authenticatedUser: any;
 
   constructor(
     private loginService: LoginService,
-    private localStorageService: LocalStorageService
+    private sessionStorageService: SessionStorageService
   ) {}
 
   ngOnInit() {
-    this.loggedInUser = this.localStorageService.getItem('username');
+    this.authenticatedUser = this.sessionStorageService.getItem('username');
   }
 
-  isLoggedIn() {
+  isAuthenticated() {
     return this.loginService.getAuthenticated();
   }
 
   logout() {
-    this.loginService.setAuthenticated(false);
+    this.loginService.unauthenticate();
   }
 }

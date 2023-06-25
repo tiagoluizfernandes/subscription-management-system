@@ -10,8 +10,6 @@ import { SubscriptionTypeService } from '../subscription-type/subscription-type.
 })
 export class SubscriptionTypeFormComponent implements OnInit {
   subscriptionType: SubscriptionType | null = new SubscriptionType();
-
-  //showError = false;
   subscriptionTypeErrorMessage = '';
 
   constructor(
@@ -27,14 +25,12 @@ export class SubscriptionTypeFormComponent implements OnInit {
     });
   }
 
-
   saveSubscriptionType() {
     if (this.subscriptionType) {
       this.subscriptionTypeErrorMessage = '';
 
       if (this.subscriptionType.description === '' || this.subscriptionType.description === undefined) { 
         this.subscriptionTypeErrorMessage = 'Description is required.';
-        //this.showError = true;
         return;
       }
             

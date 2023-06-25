@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { SubscriptionType } from './subscription-type';
+import { LocalStorageService } from 'angular-web-storage';
 
 @Injectable({
   providedIn: 'root'
@@ -7,11 +8,20 @@ import { SubscriptionType } from './subscription-type';
 export class SubscriptionTypeService {
   private subscriptionTypeList: SubscriptionType[] = [];
 
-  getSubscriptionTypes(): SubscriptionType[] {
+  constructor(private localStorageService: LocalStorageService) {
+  }
+
+  getSubscriptionTypes(): SubscriptionType[] {    
+
+    this.subscriptionTypeList = this.localStorageService.get('subscriptionTypeList') || [];
+
     return this.subscriptionTypeList;
   }
 
   getSubscriptionType(id: number): SubscriptionType | undefined {
+
+    this.subscriptionTypeList = this.localStorageService.get('subscriptionTypeList') || [];
+
     return this.subscriptionTypeList.find((st) => st.id === id);
   }
 
@@ -26,6 +36,9 @@ export class SubscriptionTypeService {
     subscriptionType.id = maxId + 1;
 
     this.subscriptionTypeList.push(subscriptionType);
+
+    this.localStorageService.set('subscriptionTypeList', this.subscriptionTypeList);
+
   }
 
   updateSubscriptionType(subscriptionType: SubscriptionType) {
@@ -35,12 +48,17 @@ export class SubscriptionTypeService {
     if (index !== -1) {
       this.subscriptionTypeList[index] = subscriptionType;
     }
+
+    this.localStorageService.set('subscriptionTypeList', this.subscriptionTypeList);
+
   }
 
   deleteSubscriptionType(subscriptionType: SubscriptionType) {
     const index = this.subscriptionTypeList.indexOf(subscriptionType);
     if (index !== -1) {
       this.subscriptionTypeList.splice(index, 1);
+
+      this.localStorageService.set('subscriptionTypeList', this.subscriptionTypeList);
     }
   }
 }

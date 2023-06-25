@@ -15,8 +15,11 @@ export class SubscriptionItemFormComponent implements OnInit {
   subscriptionTypeList: SubscriptionType[] = [];
   selectedTypeId: number | undefined;
 
-  //showError = false;
   subscriptionItemErrorMessage = '';
+  subscriptionStartDateErrorMessage = '';
+  subscriptionEndDateErrorMessage = '';
+  subscriptionStartBillingDateErrorMessage = '';
+  notesErrorMessage = '';
 
   constructor(
     private route: ActivatedRoute,
@@ -38,17 +41,47 @@ export class SubscriptionItemFormComponent implements OnInit {
     console.log('Init ' + this.subscriptionTypeList.length);
 
   }
+  
+  countWordsUsingRegex(input: string): number {
+    const regex = /\b\w+\b/g;
+    const matches = input.match(regex);
+    return matches ? matches.length : 0;
+  }
 
   saveSubscriptionItem() {
+    const regex = /^\w+\s+\w+.*$/;
+    
     if (this.subscriptionItem) {
-      this.subscriptionItemErrorMessage = '';
+      this.subscriptionItemErrorMessage = '';      
+      this.subscriptionStartDateErrorMessage = '';
+      this.subscriptionEndDateErrorMessage = '';
+      this.subscriptionStartBillingDateErrorMessage = '';
+      this.notesErrorMessage = '';
 
-      if (
-        this.subscriptionItem.description === '' ||
-        this.subscriptionItem.description === undefined
-      ) {
-        this.subscriptionItemErrorMessage = 'Description is required.';
-        //this.showError = true;
+      if ( this.subscriptionItem.description === '' ||
+           this.subscriptionItem.description === undefined) {
+        this.subscriptionItemErrorMessage = 'Description is required.';        
+        return;
+      }
+
+      console.log('Subscription Start Date: ' + this.subscriptionItem.subscriptionStartDate);
+
+      if(this.subscriptionItem.subscriptionStartDate === undefined){
+        this.subscriptionStartDateErrorMessage = 'Subscription Start Date is required.';        
+        return;
+      }    
+
+      if(this.subscriptionItem.notes === undefined){
+        this.notesErrorMessage = 'Notes is required.';
+        return;        
+      }
+
+      const wordCount = this.countWordsUsingRegex(this.subscriptionItem.notes);
+
+      console.log('Word Count: ' + wordCount);
+
+      if (wordCount < 2) {
+        this.notesErrorMessage = 'Please enter at least two words.';
         return;
       }
 
