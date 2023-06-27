@@ -18,6 +18,7 @@ export class SubscriptionItemListComponent implements OnInit {
   subscriptionItemList: SubscriptionItem[] = [];
   selectedSubscriptionItem: SubscriptionItem = new SubscriptionItem();
   exchangeRates: any; // Variable to store the exchange rates
+  periodicities: any; // Variable to store the periodicities
 
   constructor(
     private route: ActivatedRoute,
@@ -33,6 +34,7 @@ export class SubscriptionItemListComponent implements OnInit {
     this.subscriptionTypeList =
       this.subscriptionTypeService.getSubscriptionTypes();
     this.getExchangeRates();
+    this.getPeriodicities();
   }
 
   openModal(subscriptionItem: SubscriptionItem) {
@@ -74,24 +76,33 @@ export class SubscriptionItemListComponent implements OnInit {
   getBillingPeriodicityDescription(billingPeriodicity: string): string {
     let value = '';
 
-    switch (billingPeriodicity) {
-      case 'O':
-        value = 'Once';
-        break;
-      case 'D':
-        value = 'Daily';
-        break;
-      case 'W':
-        value = 'Weekly';
-        break;
-      case 'M':
-        value = 'Monthly';
-        break;
-      case 'Y':
-        value = 'Yearly';
-        break;
-    }
+    if(this.periodicities === undefined || this.periodicities.length == 0){
 
+      switch (billingPeriodicity) {
+        case 'O':
+          value = 'Once';
+          break;
+        case 'D':
+          value = 'Daily';
+          break;
+        case 'W':
+          value = 'Weekly';
+          break;
+        case 'M':
+          value = 'Monthly';
+          break;
+        case 'Y':
+          value = 'Yearly';
+          break;
+      }
+    }else{
+      //console.log('billingPeriodicity', billingPeriodicity);
+      this.periodicities.forEach((element: any) => {
+        if(element.code == billingPeriodicity){
+          value = element.description;
+        }
+      });
+    }
     return value;
   }
 
@@ -106,7 +117,6 @@ export class SubscriptionItemListComponent implements OnInit {
         break;
       case 2:
         if (this.exchangeRates) {
-          // Use the stored exchange rates if available
           valorDolar = Number(this.exchangeRates.value[0].cotacaoCompra);
         }
 
@@ -122,13 +132,13 @@ export class SubscriptionItemListComponent implements OnInit {
     const formattedDate = this.formatDate(currentDate);
 
     const url = `https://olinda.bcb.gov.br/olinda/servico/PTAX/versao/v1/odata/CotacaoDolarDia(dataCotacao=@dataCotacao)?@dataCotacao='${formattedDate}'&$top=100&$format=json`;
+
     this.http.get(url).subscribe(
       (response) => {
         console.log('response', response);
         this.exchangeRates = response;
       },
       (error) => {
-        // Handle the error
         console.error(error);
       }
     );
@@ -139,5 +149,20 @@ export class SubscriptionItemListComponent implements OnInit {
     const month = ('0' + (date.getMonth() + 1)).slice(-2);
     const day = ('0' + date.getDate()).slice(-2);
     return `${month}-${day}-${year}`;
+  }
+
+  getPeriodicities(): void {
+    const url = `http://localhost:3000/periodicities`;
+
+    this.http.get(url).subscribe(
+      (response) => {
+        console.log('response', response);
+        this.periodicities = response;
+
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
   }
 }
