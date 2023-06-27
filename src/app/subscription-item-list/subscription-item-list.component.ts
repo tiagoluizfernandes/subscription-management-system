@@ -5,6 +5,9 @@ import { SubscriptionType } from '../subscription-type/subscription-type';
 import { SubscriptionItemService } from '../subscription-item/subscription-item.service';
 import { SubscriptionTypeService } from '../subscription-type/subscription-type.service';
 
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+
 @Component({
   selector: 'app-subscription-item-list',
   templateUrl: './subscription-item-list.component.html',
@@ -14,12 +17,14 @@ export class SubscriptionItemListComponent implements OnInit {
   subscriptionTypeList: SubscriptionType[] = [];
   subscriptionItemList: SubscriptionItem[] = [];
   selectedSubscriptionItem: SubscriptionItem = new SubscriptionItem();
+  exchangeRates: any; // Variable to store the exchange rates
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private subscriptionItemService: SubscriptionItemService,
-    private subscriptionTypeService: SubscriptionTypeService
+    private subscriptionTypeService: SubscriptionTypeService,
+    private http: HttpClient
   ) {}
 
   ngOnInit() {
@@ -27,6 +32,7 @@ export class SubscriptionItemListComponent implements OnInit {
       this.subscriptionItemService.getSubscriptionItems();
     this.subscriptionTypeList =
       this.subscriptionTypeService.getSubscriptionTypes();
+    this.getExchangeRates();
   }
 
   openModal(subscriptionItem: SubscriptionItem) {
@@ -63,5 +69,75 @@ export class SubscriptionItemListComponent implements OnInit {
     );
 
     return subscriptionType?.description || '';
+  }
+
+  getBillingPeriodicityDescription(billingPeriodicity: string): string {
+    let value = '';
+
+    switch (billingPeriodicity) {
+      case 'O':
+        value = 'Once';
+        break;
+      case 'D':
+        value = 'Daily';
+        break;
+      case 'W':
+        value = 'Weekly';
+        break;
+      case 'M':
+        value = 'Monthly';
+        break;
+      case 'Y':
+        value = 'Yearly';
+        break;
+    }
+
+    return value;
+  }
+
+  getCurrencyDescription(currency: number): string {
+    const id = Number(currency);
+    let value = '';
+    let valorDolar = 0;
+
+    switch (id) {
+      case 1:
+        value = 'Real';
+        break;
+      case 2:
+        if (this.exchangeRates) {
+          // Use the stored exchange rates if available
+          valorDolar = Number(this.exchangeRates.value[0].cotacaoCompra);
+        }
+
+        value = 'Dolar (' + valorDolar + ')';
+        break;
+    }
+
+    return value;
+  }
+
+  getExchangeRates(): void {
+    const currentDate = new Date();
+    const formattedDate = this.formatDate(currentDate);
+
+    const url = `https://olinda.bcb.gov.br/olinda/servico/PTAX/versao/v1/odata/CotacaoDolarDia(dataCotacao=@dataCotacao)?@dataCotacao='${formattedDate}'&$top=100&$format=json`;
+    this.http.get(url).subscribe(
+      (response) => {
+        console.log('response', response);
+        this.exchangeRates = response;
+      },
+      (error) => {
+        // Handle the error
+        console.error(error);
+      }
+    );
+  }
+
+  private formatDate(date: Date): string {
+    const year = date.getFullYear();
+    const month = ('0' + (date.getMonth() + 1)).slice(-2);
+    const day = ('0' + date.getDate()).slice(-2);
+    return `${month}-${day}-${year}`;
   }
 }

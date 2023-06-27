@@ -15,6 +15,8 @@ import { AppHeaderComponent } from './app-header/app-header.component';
 import { AppFooterComponent } from './app-footer/app-footer.component';
 import { AngularWebStorageModule } from 'angular-web-storage';
 import { LoginService } from './login/login.service';
+import { AboutDetailComponent } from './about-detail/about-detail.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -28,14 +30,16 @@ import { LoginService } from './login/login.service';
     SubscriptionItemFormComponent,
     AppHeaderComponent,
     AppFooterComponent,
+    AboutDetailComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    AngularWebStorageModule
+    AngularWebStorageModule,
+    HttpClientModule
   ],
   providers: [LoginService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

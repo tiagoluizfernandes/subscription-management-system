@@ -9,6 +9,7 @@ export class SubscriptionItem {
   subscriptionStartDate: Date;
   subscriptionEndDate: Date;
   subscriptionStartBillingDate: Date;
+  currency: number;
   notes: string;
 
   constructor(
@@ -20,6 +21,7 @@ export class SubscriptionItem {
     subscriptionStartDate?: Date,
     subscriptionEndDate?: Date,
     subscriptionStartBillingDate?: Date,
+    currency?: number,
     notes?: string
   ) {
     this.id = id!;
@@ -30,6 +32,7 @@ export class SubscriptionItem {
     this.subscriptionStartDate = subscriptionStartDate!;
     this.subscriptionEndDate = subscriptionEndDate!;
     this.subscriptionStartBillingDate = subscriptionStartBillingDate!;
+    this.currency = currency!;
     this.notes = notes!;
   }
 }
