@@ -1,0 +1,9 @@
+<div class="header-container"  *ngIf="!isAuthenticated()">
+  <header class="header">Subscription Management System</header>  
+</div>
+<div class="header-container"  *ngIf="isAuthenticated()">
+  <header class="header">Subscription Management System - [{{ authenticatedUser }}]</header>
+  <div class="logout-icon" (click)="logout()" >
+    <i class="fas fa-sign-out-alt"></i>
+  </div>
+</div>
