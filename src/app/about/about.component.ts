@@ -9,8 +9,6 @@ export class AboutComponent {
   aboutText: string = 'Welcome to our website!';
 
   handleMessageSent() {
-    // Handle the message sent event here
     console.log('Message sent from AboutPage');
-    // Perform any necessary actions
   }
 }

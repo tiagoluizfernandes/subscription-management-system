@@ -17,8 +17,8 @@ export class SubscriptionItemListComponent implements OnInit {
   subscriptionTypeList: SubscriptionType[] = [];
   subscriptionItemList: SubscriptionItem[] = [];
   selectedSubscriptionItem: SubscriptionItem = new SubscriptionItem();
-  exchangeRates: any; // Variable to store the exchange rates
-  periodicities: any; // Variable to store the periodicities
+  exchangeRates: any;
+  periodicities: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -76,8 +76,7 @@ export class SubscriptionItemListComponent implements OnInit {
   getBillingPeriodicityDescription(billingPeriodicity: string): string {
     let value = '';
 
-    if(this.periodicities === undefined || this.periodicities.length == 0){
-
+    if (this.periodicities === undefined || this.periodicities.length == 0) {
       switch (billingPeriodicity) {
         case 'O':
           value = 'Once';
@@ -95,10 +94,9 @@ export class SubscriptionItemListComponent implements OnInit {
           value = 'Yearly';
           break;
       }
-    }else{
-      //console.log('billingPeriodicity', billingPeriodicity);
+    } else {
       this.periodicities.forEach((element: any) => {
-        if(element.code == billingPeriodicity){
+        if (element.code == billingPeriodicity) {
           value = element.description;
         }
       });
@@ -127,6 +125,23 @@ export class SubscriptionItemListComponent implements OnInit {
     return value;
   }
 
+  getCurrencySymbol(currency: number): string {
+    const id = Number(currency);
+    let value = '';
+    let valorDolar = 0;
+
+    switch (id) {
+      case 1:
+        value = 'BRL';
+        break;
+      case 2:
+        value = 'USD';
+        break;
+    }
+
+    return value;
+  }
+
   getExchangeRates(): void {
     const currentDate = new Date();
     const formattedDate = this.formatDate(currentDate);
@@ -135,11 +150,11 @@ export class SubscriptionItemListComponent implements OnInit {
 
     this.http.get(url).subscribe(
       (response) => {
-        console.log('response', response);
+        console.log('response getExchangeRates', response);
         this.exchangeRates = response;
       },
       (error) => {
-        console.error(error);
+        console.error('error getExchangeRates', error);
       }
     );
   }
@@ -152,17 +167,19 @@ export class SubscriptionItemListComponent implements OnInit {
   }
 
   getPeriodicities(): void {
-    const url = `http://localhost:3000/periodicities`;
-
-    this.http.get(url).subscribe(
+    this.getDataFromApi('http://localhost:3000/periodicities').subscribe(
       (response) => {
-        console.log('response', response);
+        console.log('response getPeriodicities', response);
         this.periodicities = response;
-
       },
       (error) => {
-        console.error(error);
+        console.error('error getPeriodicities', error);
       }
     );
+
+  }
+
+  private getDataFromApi(url: string): Observable<any[]> {
+    return this.http.get<any[]>(url);
   }
 }

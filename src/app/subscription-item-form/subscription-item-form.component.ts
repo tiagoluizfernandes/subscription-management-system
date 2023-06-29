@@ -62,7 +62,9 @@ export class SubscriptionItemFormComponent implements OnInit {
         return;
       }
 
-      console.log('Subscription Start Date: ' + this.subscriptionItem.subscriptionStartDate);
+      if( this.subscriptionItem.billingValue === undefined){
+        this.subscriptionItem.billingValue = 0;
+      }
 
       if(this.subscriptionItem.subscriptionStartDate === undefined){
         this.subscriptionStartDateErrorMessage = 'Subscription Start Date is required.';
@@ -93,7 +95,6 @@ export class SubscriptionItemFormComponent implements OnInit {
           this.subscriptionItem
         );
       }
-      // Redirect to the list page after saving
       this.router.navigate(['/subscription-item-list']);
     }
   }
