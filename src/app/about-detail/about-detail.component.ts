@@ -10,7 +10,6 @@ export class AboutDetailComponent {
   @Output() messageSent = new EventEmitter<void>();
 
   sendMessage() {
-    // Emit the messageSent event
     this.messageSent.emit();
   }
 }

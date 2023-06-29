@@ -21,7 +21,7 @@
         <td>{{ getSubscriptionTypeDescription(item.subscriptionTypeId) }}</td>
         <td>{{ item.description }}</td>
         <td>{{ getBillingPeriodicityDescription(item.billingPeriodicity) }}</td>
-        <td>{{ item.billingValue }}</td>
+        <td>{{ item.billingValue | currency: getCurrencySymbol(item.currency) }}</td>
         <td>{{ item.subscriptionStartDate }}</td>
         <td>{{ item.subscriptionEndDate }}</td>
         <td>{{ item.subscriptionStartBillingDate }}</td>

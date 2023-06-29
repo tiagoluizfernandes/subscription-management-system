@@ -29,18 +29,17 @@ export class SubscriptionTypeFormComponent implements OnInit {
     if (this.subscriptionType) {
       this.subscriptionTypeErrorMessage = '';
 
-      if (this.subscriptionType.description === '' || this.subscriptionType.description === undefined) { 
+      if (this.subscriptionType.description === '' || this.subscriptionType.description === undefined) {
         this.subscriptionTypeErrorMessage = 'Description is required.';
         return;
       }
-            
-      if (this.subscriptionType.id === 0 || this.subscriptionType.id === undefined) {        
+
+      if (this.subscriptionType.id === 0 || this.subscriptionType.id === undefined) {
         this.subscriptionTypeService.addSubscriptionType(this.subscriptionType);
       }
       else{
         this.subscriptionTypeService.updateSubscriptionType(this.subscriptionType);
       }
-      // Redirect to the list page after saving
       this.router.navigate(['/subscription-type-list']);
     }
   }

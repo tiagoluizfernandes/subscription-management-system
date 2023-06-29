@@ -12,7 +12,7 @@ export class LoginComponent {
   username!: string;
   password!: string;
   loginError: boolean = false;
-  
+
   constructor(
     private router: Router,
     private loginService: LoginService,
@@ -23,19 +23,19 @@ export class LoginComponent {
     this.loginError = false;
 
     const authenticated = this.sessionStorageService.get('authenticated');
-    
+
     if(authenticated){
-      this.router.navigate(['/home']); // Redireciona para a home
+      this.router.navigate(['/home']);
     }else{
 
       if ( (this.username === 'admin' && this.password === 'admin' || (this.username === 'user' && this.password === 'user'))) {
         console.log('Login successful');
-        this.loginService.authenticate(this.username,true); // Set the login status in the login service
-        
-        this.router.navigate(['/home']); // Redireciona para a home
+        this.loginService.authenticate(this.username,true);
+
+        this.router.navigate(['/home']);
       } else {
         this.loginError = true;
-        console.log('Invalid username or password');        
+        console.log('Invalid username or password');
       }
     }
   }
