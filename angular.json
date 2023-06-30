@@ -13,6 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "baseHref": "/",
             "outputPath": "dist/subscription-management-system",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -26,16 +27,23 @@
             ],
             "styles": [
               "src/styles.css",
-               "node_modules/@fortawesome/fontawesome-free/css/all.min.css"
+              "node_modules/@fortawesome/fontawesome-free/css/all.min.css"
             ],
             "scripts": []
           },
           "configurations": {
             "production": {
+              "optimization": {
+                "scripts": true,
+                "styles": {
+                  "minify": true,
+                  "inlineCritical": false
+                }
+              },
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
+                  "maximumWarning": "1mb",
                   "maximumError": "1mb"
                 },
                 {
@@ -48,7 +56,7 @@
             },
             "development": {
               "buildOptimizer": false,
-              "optimization": false,
+              "optimization": true,
               "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
@@ -92,8 +100,30 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy",
+          "options": {
+            "baseHref": "/subscription-management-system/",
+            "name": "Subscription Management System",
+            "email": ""
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
+          }
         }
       }
     }
+  },
+  "cli": {
+    "schematicCollections": [
+      "@angular-eslint/schematics"
+    ]
   }
 }

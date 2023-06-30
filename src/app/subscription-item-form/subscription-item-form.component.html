@@ -3,8 +3,8 @@
 
   <form #myForm="ngForm" (ngSubmit)="saveSubscriptionItem()">
     <div class="form-group">
-      <label for="id" >ID:</label>
-      <input type="text" id="id" name="id" [(ngModel)]="subscriptionItem!.id" disabled="true">
+      <label for="itemId" >ID:</label>
+      <input type="text" id="itemId" name="itemId" [(ngModel)]="subscriptionItem!.id" disabled="true">
     </div>
     <div class="form-group">
       <label for="subscriptionType">Subscription Type:</label>
@@ -57,7 +57,7 @@
       </div>
     </div>
      <div class="form-group">
-      <label for="currency">Billing Periodicity:</label>
+      <label for="currency">Currency:</label>
       <select id="currency" name="currency" [(ngModel)]="subscriptionItem!.currency">
         <option value=""></option>
         <option value="1">Real</option>

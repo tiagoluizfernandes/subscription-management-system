@@ -7,7 +7,7 @@ Ideia é ter um controle onde o usuário vai entrar com o dados das assinaturas
 Controlar quais são as assinaturas, o valor, a recorrência de pagamento (se existir) e o tempo para vencimento.
 
 ## Endereço de Deploy - GitHub Pages
-TBD
+https://tiagoluizfernandes.github.io/subscription-management-system
 
 ## Protótipos
 ![Login](wireframes/Page%201.svg)
@@ -41,7 +41,12 @@ TBD
 - [X] Apresentar uma lista de dados com a diretiva estrutural ngFor.
 - [X] Usar a diretiva ngIf
 - [X] Formatar a apresentação de dados com Pipes.
-- [ ] Build e deploy da aplicação.
+- [X] Build e deploy da aplicação.
 
 ## Manual de execução
-TBD
+### Local
+ng build --configuration=production
+npx http-server .\dist\subscription-management-system\
+
+### Git Hub Pages
+ng deploy
