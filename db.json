@@ -1,0 +1,24 @@
+{
+  "periodicities": [
+    {
+      "periodicityId": "O",
+      "description": "Once"
+    },
+    {
+      "periodicityId": "D",
+      "description": "Daily"
+    },
+    {
+      "periodicityId": "W",
+      "description": "Weekly"
+    },
+    {
+      "periodicityId": "M",
+      "description": "Monthly"
+    },
+    {
+      "periodicityId": "Y",
+      "description": "Yearly"
+    }
+  ]
+}

@@ -1,0 +1,77 @@
+<div class="container">
+  <h2>Edit Subscription Item</h2>
+
+  <form #myForm="ngForm" (ngSubmit)="saveSubscriptionItem()">
+    <div class="form-group">
+      <label for="itemId" >ID:</label>
+      <input type="text" id="itemId" name="itemId" [(ngModel)]="subscriptionItem!.id" disabled="true">
+    </div>
+    <div class="form-group">
+      <label for="subscriptionType">Subscription Type:</label>
+      <select id="subscriptionType" name="subscriptionType" [(ngModel)]="subscriptionItem!.subscriptionTypeId">
+        <option value=""></option>
+        <option *ngFor="let type of subscriptionTypeList" [value]="type.id">{{ type.description }}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="description">Description:</label>
+      <input type="text" id="description" name="description" [(ngModel)]="subscriptionItem!.description" required>
+      <div *ngIf="subscriptionItemErrorMessage" class="error-message">
+        {{subscriptionItemErrorMessage}}
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="billingPeriodicity">Billing Periodicity:</label>
+      <select id="billingPeriodicity" name="billingPeriodicity" [(ngModel)]="subscriptionItem!.billingPeriodicity">
+        <option value=""></option>
+        <option value="O">Once</option>
+        <option value="D">Daily</option>
+        <option value="W">Weekly</option>
+        <option value="M">Monthly</option>
+        <option value="Y">Yearly</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="billingValue">Billing Value:</label>
+      <input type="number" id="billingValue" name="billingValue" [(ngModel)]="subscriptionItem!.billingValue">
+    </div>
+    <div class="form-group">
+      <label for="subscriptionStartDate">Subscription Start Date:</label>
+      <input type="date" id="subscriptionStartDate" name="subscriptionStartDate" [(ngModel)]="subscriptionItem!.subscriptionStartDate">
+      <div *ngIf="subscriptionStartDateErrorMessage" class="error-message">
+        {{subscriptionStartDateErrorMessage}}
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="subscriptionEndDate">Subscription End Date:</label>
+      <input type="date" id="subscriptionEndDate" name="subscriptionEndDate" [(ngModel)]="subscriptionItem!.subscriptionEndDate">
+      <div *ngIf="subscriptionEndDateErrorMessage" class="error-message">
+        {{subscriptionEndDateErrorMessage}}
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="subscriptionStartBillingDate">Subscription Start Billing Date:</label>
+      <input type="date" id="subscriptionStartBillingDate" name="subscriptionStartBillingDate" [(ngModel)]="subscriptionItem!.subscriptionStartBillingDate">
+      <div *ngIf="subscriptionStartBillingDateErrorMessage" class="error-message">
+        {{subscriptionStartBillingDateErrorMessage}}
+      </div>
+    </div>
+     <div class="form-group">
+      <label for="currency">Currency:</label>
+      <select id="currency" name="currency" [(ngModel)]="subscriptionItem!.currency">
+        <option value=""></option>
+        <option value="1">Real</option>
+        <option value="2">Dolar</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="notes">Notes:</label>
+      <textarea id="notes" name="notes" [(ngModel)]="subscriptionItem!.notes" style="resize: none;"></textarea>
+      <div *ngIf="notesErrorMessage" class="error-message">
+        {{notesErrorMessage}}
+      </div>
+    </div>
+    <button class="btn btn-primary" type="submit" [disabled]="!myForm.valid">Save</button>
+    <button class="btn btn-secondary" routerLink="/subscription-item-list">Back to List</button>
+  </form>
+</div>
